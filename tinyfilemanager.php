@@ -2277,7 +2277,10 @@ function fm_rename($old, $new)
 {
     $isFileAllowed = fm_is_valid_ext($new);
 
-    if(!$isFileAllowed) return false;
+    if(!is_dir($old))
+    {
+        if (!$isFileAllowed) return false;
+    }
 
     return (!file_exists($new) && file_exists($old)) ? rename($old, $new) : null;
 }
